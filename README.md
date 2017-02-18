@@ -11,4 +11,9 @@
       
       For example 
       add : Joanne Rowling “Harry Potter”
+      
+      HOW TO RUN PROJECT
+      
+      Сhange your configuration in consol/libr/config/application.properties
+      run main
      
