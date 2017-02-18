@@ -6,7 +6,6 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
@@ -20,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import consol.libr.dao.BookDao;
 import consol.libr.dao.impl.BookDaoImpl;
+import consol.libr.main.App;
 
 @Configuration
 @EnableTransactionManagement
@@ -51,14 +51,11 @@ public class DatabaseConfig {
 
 		entityManagerFactory.setDataSource(dataSource);
 
-		// Classpath scanning of @Component, @Service, etc annotated class
 		entityManagerFactory.setPackagesToScan("consol.libr*");
 
-		// Vendor adapter
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
 
-		// Hibernate properties
 		Properties additionalProperties = new Properties();
 		additionalProperties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		additionalProperties.put("hibernate.show_sql", false);
@@ -83,5 +80,10 @@ public class DatabaseConfig {
 	@Bean
 	public BookDao bookdao() {
 		return new BookDaoImpl();
+	}
+
+	@Bean
+	public App app() {
+		return new App();
 	}
 }
